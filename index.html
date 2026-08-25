@@ -28,7 +28,8 @@
     <style type="text/tailwindcss">
         @theme {
             --color-primary: #0f172a;
-            --color-accent: #2563eb;
+            --color-accent: #EE0808;
+            --color-accent-dark: #C40707;
             --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
             --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
             --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
@@ -69,7 +70,7 @@
                     <i data-lucide="phone" class="w-4 h-4"></i>
                     <span>305.877.5964</span>
                 </a>
-                <a href="#quote" class="bg-accent hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all btn-glow">
+                <a href="#quote" class="bg-accent hover:bg-accent-dark text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all btn-glow">
                     Get a Quote
                 </a>
             </div>
@@ -112,7 +113,7 @@
         <!-- Grid Background -->
         <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-white via-transparent to-slate-50"></div>
-        <div class="absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_40%,#3b82f615,transparent)]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_40%,#ee080814,transparent)]"></div>
 
         <div id="hero-content" class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-32 md:pt-32 text-center md:text-left">
             <div class="max-w-4xl mx-auto md:mx-0">
@@ -123,7 +124,7 @@
                 
                 <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.9] text-primary mb-8 font-display">
                     <span class="reveal inline-block reveal-delay-100" data-es="ALMACENAJE">WAREHOUSING</span><br />
-                    <span class="reveal inline-block reveal-delay-200"><span data-es="EN">IN</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-blue-400">MIAMI</span></span>
+                    <span class="reveal inline-block reveal-delay-200"><span data-es="EN">IN</span> <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-red-400">MIAMI</span></span>
                 </h1>
                 
                 <div class="reveal reveal-delay-300 glass-card rounded-2xl p-6 md:p-8 inline-block mb-10 text-center md:text-left">
@@ -154,8 +155,8 @@
                         <div class="w-2 h-2 rounded-full bg-accent"></div>
                         Hablamos Español
                     </div>
-                    <div class="flex items-center gap-2" data-es="<div class='w-2 h-2 rounded-full bg-blue-500'></div>Fulfillment">
-                        <div class="w-2 h-2 rounded-full bg-blue-500"></div>
+                    <div class="flex items-center gap-2" data-es="<div class='w-2 h-2 rounded-full bg-red-500'></div>Fulfillment">
+                        <div class="w-2 h-2 rounded-full bg-red-500"></div>
                         Fulfillment
                     </div>
                 </div>
@@ -164,7 +165,7 @@
     </section>
 
     <!-- MARQUEE -->
-    <div class="py-8 bg-accent text-white border-y border-blue-700 group marquee-container">
+    <div class="py-8 bg-accent text-white border-y border-accent-dark group marquee-container">
         <div class="marquee-content gap-8 items-center">
             <!-- Repeated blocks for seamless loop -->
             <div class="flex items-center gap-8">
@@ -795,7 +796,7 @@
         <div class="bg-white px-4 py-2 rounded-full shadow-lg border border-slate-200 hidden md:block">
             <span class="text-sm font-bold text-slate-700">Need help?</span>
         </div>
-        <a href="tel:3058775964" class="w-14 h-14 bg-accent hover:bg-blue-700 text-white rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-110" aria-label="Call now">
+        <a href="tel:3058775964" class="w-14 h-14 bg-accent hover:bg-accent-dark text-white rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-110" aria-label="Call now">
             <i data-lucide="phone" class="w-6 h-6 animate-pulse"></i>
         </a>
     </div>
