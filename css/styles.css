@@ -1,0 +1,204 @@
+:root {
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.stencil-text {
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  font-size: 0.875rem;
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+}
+
+/* 3D Estimator Grid */
+.iso-scene {
+  perspective: 1000px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.iso-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 44px);
+  grid-template-rows: repeat(5, 44px);
+  gap: 8px;
+  transform: rotateX(60deg) rotateZ(-45deg);
+  transform-style: preserve-3d;
+}
+
+.iso-pallet {
+  width: 44px;
+  height: 44px;
+  background-color: #fcd34d;
+  border: 1px solid #d97706;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s;
+}
+
+.iso-pallet::before,
+.iso-pallet::after {
+  content: '';
+  position: absolute;
+  border: 1px solid #d97706;
+}
+
+.iso-pallet::before {
+  width: 12px;
+  height: 100%;
+  top: 0;
+  left: 100%;
+  transform-origin: left;
+  transform: rotateY(90deg);
+  background-color: #f59e0b;
+}
+
+.iso-pallet::after {
+  width: 100%;
+  height: 12px;
+  top: 100%;
+  left: 0;
+  transform-origin: top;
+  transform: rotateX(-90deg);
+  background-color: #b45309;
+}
+
+/* Glow pegado al CTA (crítico → CSS plano, hover blindado) */
+.btn-glow { box-shadow: 0 0 15px rgba(37, 99, 235, 0.3); }
+@media (hover: hover) and (pointer: fine) {
+  .btn-glow:hover { box-shadow: 0 0 20px rgba(37, 99, 235, 0.5); }
+}
+
+/* Button Loading State */
+.btn-loading {
+  pointer-events: none;
+  opacity: 0.8;
+  cursor: wait;
+}
+.btn-loading .btn-text {
+  display: none;
+}
+.btn-loading::after {
+  content: 'Sending...';
+  display: inline-block;
+}
+.btn-loading i {
+  animation: pulse-icon 1s infinite;
+}
+@keyframes pulse-icon {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(0.8); opacity: 0.5; }
+}
+.btn-success { background: #059669 !important; pointer-events: none; }
+.btn-success .btn-text { display: none; }
+.btn-success::after { content: 'Request sent — we\'ll contact you'; display: inline-block; }
+.btn-error { background: #dc2626 !important; }
+.btn-error .btn-text { display: none; }
+.btn-error::after { content: 'Error — call 305.877.5964'; display: inline-block; }
+
+/* Marquee */
+.marquee-container {
+  overflow: hidden;
+  display: flex;
+  white-space: nowrap;
+}
+
+.marquee-content {
+  display: flex;
+  animation: marquee 30s linear infinite;
+}
+
+.marquee-content > div {
+  flex-shrink: 0;
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Reveal Animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal.reveal-active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-100 { transition-delay: 100ms; }
+.reveal-delay-200 { transition-delay: 200ms; }
+.reveal-delay-300 { transition-delay: 300ms; }
+.reveal-delay-400 { transition-delay: 400ms; }
+.reveal-delay-500 { transition-delay: 500ms; }
+
+/* Reduced Motion overrides */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .marquee-content {
+    animation: none !important;
+  }
+  html, body {
+    scroll-behavior: auto !important;
+  }
+  .dock-door {
+    display: none !important;
+  }
+}
+
+/* Dock Door Transition */
+.dock-door {
+  position: absolute;
+  inset: 0;
+  z-index: 40;
+  pointer-events: none;
+  background-color: #334155;
+  background-image: repeating-linear-gradient(to bottom, transparent 0, transparent 48px, rgba(0, 0, 0, 0.4) 48px, rgba(0, 0, 0, 0.4) 50px);
+  transform: translateY(0);
+  transition: transform 1.5s cubic-bezier(0.77, 0, 0.175, 1);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+}
+
+.dock-door::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 24px;
+  background: repeating-linear-gradient(45deg, #f59e0b 0, #f59e0b 20px, #000 20px, #000 40px);
+  border-top: 2px solid #000;
+  border-bottom: 4px solid #000;
+}
+
+.dock-door.is-open {
+  transform: translateY(-100%);
+}

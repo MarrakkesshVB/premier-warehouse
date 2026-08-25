@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premier Warehouse & Logistics Management</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=Manrope:wght@400;500;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/styles.css">
+    
+    <!-- Tailwind CSS v4 (build browser local, sin CDN) -->
+    <script src="./js/tailwindcss.js"></script>
+    <style type="text/tailwindcss">
+        @theme {
+            --color-primary: #0f172a;
+            --color-accent: #2563eb;
+            --font-sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+            --font-display: "Syne", ui-sans-serif, system-ui, sans-serif;
+            --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+        }
+    </style>
+    
+    <!-- Lucide Icons (local, versión fijada) -->
+    <script src="./js/lucide.min.js"></script>
+</head>
+<body class="bg-slate-50 font-sans text-slate-900 overflow-x-hidden antialiased relative">
+
+    <!-- NAVBAR -->
+    <header id="navbar" class="fixed top-0 inset-x-0 z-50 transition-all duration-300 bg-transparent py-6">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <!-- Logo -->
+            <a href="#" class="flex items-center gap-2 group">
+                <div class="w-8 h-8 bg-primary text-white flex items-center justify-center rounded-lg font-display font-bold group-hover:bg-accent transition-colors">P</div>
+                <span class="font-display font-bold tracking-tight text-xl hidden sm:block text-primary">Premier Warehouse</span>
+            </a>
+            
+            <!-- Desktop Nav -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#services" class="text-sm font-bold text-slate-600 hover:text-accent transition-colors uppercase tracking-wide" data-es="Servicios">Services</a>
+                <a href="#rates" class="text-sm font-bold text-slate-600 hover:text-accent transition-colors uppercase tracking-wide" data-es="Tarifas">Rates</a>
+                <a href="#facility" class="text-sm font-bold text-slate-600 hover:text-accent transition-colors uppercase tracking-wide" data-es="Bodega">Facility</a>
+            </nav>
+
+            <!-- Desktop Actions -->
+            <div class="hidden md:flex items-center gap-4">
+                <button id="lang-toggle-desktop" class="flex items-center gap-1 text-xs font-bold text-slate-500 hover:text-slate-800 transition-colors bg-slate-100 px-2 py-1 rounded-md border border-slate-200" aria-label="Toggle Language">
+                    <span id="lang-en-desktop" class="text-accent transition-colors">EN</span>
+                    <span class="text-slate-300">|</span>
+                    <span id="lang-es-desktop" class="transition-colors">ES</span>
+                </button>
+                <a href="tel:3058775964" class="flex items-center gap-2 text-sm font-bold text-slate-600 hover:text-accent transition-colors">
+                    <i data-lucide="phone" class="w-4 h-4"></i>
+                    <span>305.877.5964</span>
+                </a>
+                <a href="#quote" class="bg-accent hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg text-sm font-bold transition-all btn-glow">
+                    Get a Quote
+                </a>
+            </div>
+
+            <!-- Mobile Toggle -->
+            <button id="menu-btn" class="md:hidden p-2 text-slate-700 focus:outline-none" aria-label="Toggle Menu">
+                <i id="menu-icon" data-lucide="menu" class="w-6 h-6"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="hidden opacity-0 -translate-y-4 fixed inset-0 z-40 bg-white pt-24 px-6 pb-8 flex flex-col md:hidden overflow-y-auto transition-all duration-200">
+        <nav class="flex flex-col gap-6 mb-8">
+            <a href="#services" class="text-2xl font-display font-bold text-slate-800 border-b border-slate-100 pb-4" data-es="Servicios">Services</a>
+            <a href="#rates" class="text-2xl font-display font-bold text-slate-800 border-b border-slate-100 pb-4" data-es="Tarifas">Rates</a>
+            <a href="#facility" class="text-2xl font-display font-bold text-slate-800 border-b border-slate-100 pb-4" data-es="Bodega">Facility</a>
+        </nav>
+        <div class="mt-auto space-y-4">
+            <div class="flex justify-center mb-6">
+                <button id="lang-toggle-mobile" class="flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-slate-800 transition-colors bg-slate-100 px-4 py-2 rounded-lg border border-slate-200" aria-label="Toggle Language">
+                    <span id="lang-en-mobile" class="text-accent transition-colors">EN</span>
+                    <span class="text-slate-300">|</span>
+                    <span id="lang-es-mobile" class="transition-colors">ES</span>
+                </button>
+            </div>
+            <a href="#quote" class="w-full bg-accent text-white py-4 rounded-xl text-center font-bold text-lg flex items-center justify-center gap-2" data-es="Cotizar Ahora">
+                Get a Quote
+            </a>
+            <a href="tel:3058775964" class="w-full bg-slate-50 border border-slate-200 text-slate-800 py-4 rounded-xl text-center font-bold text-lg flex items-center justify-center gap-2">
+                <i data-lucide="phone" class="w-5 h-5"></i>
+                <span data-es="Llámanos Ahora">Call Us Now</span>
+            </a>
+        </div>
+    </div>
+
+    <main>
+    <!-- HERO -->
+    <section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-50">
+        <!-- Grid Background -->
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-white via-transparent to-slate-50"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_800px_at_50%_40%,#3b82f615,transparent)]"></div>
+
+        <div id="hero-content" class="relative z-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full pt-32 md:pt-32 text-center md:text-left">
+            <div class="max-w-4xl mx-auto md:mx-0">
+                <div class="flex items-center justify-center md:justify-start gap-3 mb-6">
+                    <span class="w-10 h-[2px] bg-accent"></span>
+                    <span class="stencil-text text-accent" data-es="ALMACENAJE Y LOGÍSTICA PREMIER">PREMIER WAREHOUSE & LOGISTICS</span>
+                </div>
+                
+                <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold leading-[0.9] text-primary mb-8 font-display">
+                    <span class="reveal inline-block reveal-delay-100" data-es="ALMACENAJE">WAREHOUSING</span><br />
+                    <span class="reveal inline-block reveal-delay-200" data-es="EN <span class='text-transparent bg-clip-text bg-gradient-to-r from-accent to-blue-400'>MIAMI</span>">IN <span class="text-transparent bg-clip-text bg-gradient-to-r from-accent to-blue-400">MIAMI</span></span>
+                </h1>
+                
+                <div class="reveal reveal-delay-300 glass-card rounded-2xl p-6 md:p-8 inline-block mb-10 text-center md:text-left">
+                    <p class="text-lg md:text-xl text-slate-600 mb-2 font-medium" data-es="Almacenaje desde <span class='font-mono font-bold text-accent text-3xl'>$15.00</span> <span class='text-slate-500 text-lg'>/pallet/mes</span>">
+                        Storage starting at <span class="font-mono font-bold text-accent text-3xl">$15.00</span> <span class="text-slate-500 text-lg">/pallet/mo</span>
+                    </p>
+                    <p class="text-sm font-bold text-emerald-600 bg-emerald-50 inline-block px-3 py-1 rounded-full border border-emerald-100" data-es="Promoción especial para clientes nuevos">
+                        Special promo for new clients
+                    </p>
+                </div>
+
+                <div class="reveal reveal-delay-400 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+                    <a href="#quote" class="w-full sm:w-auto bg-primary hover:bg-slate-800 text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-2 group" data-es="<span>Cotizar Ahora</span><span class='group-hover:translate-x-1 transition-transform'>→</span>">
+                        <span>Get a Quote</span>
+                        <span class="group-hover:translate-x-1 transition-transform">→</span>
+                    </a>
+                    <a href="tel:3058775964" class="w-full sm:w-auto glass hover:bg-white text-primary px-8 py-4 rounded-xl font-bold transition-all border-slate-200 border flex items-center justify-center gap-2" data-es="Llámanos al 305.877.5964">
+                        Call us at 305.877.5964
+                    </a>
+                </div>
+
+                <div class="mt-12 flex flex-wrap items-center justify-center md:justify-start gap-6 text-sm font-bold text-slate-500 stencil-text reveal reveal-delay-500">
+                    <div class="flex items-center gap-2" data-es="<div class='w-2 h-2 rounded-full bg-emerald-500'></div>Seguridad 24/7">
+                        <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
+                        24/7 Security
+                    </div>
+                    <div class="flex items-center gap-2" data-es="<div class='w-2 h-2 rounded-full bg-accent'></div>Hablamos Español">
+                        <div class="w-2 h-2 rounded-full bg-accent"></div>
+                        Hablamos Español
+                    </div>
+                    <div class="flex items-center gap-2" data-es="<div class='w-2 h-2 rounded-full bg-blue-500'></div>Fulfillment">
+                        <div class="w-2 h-2 rounded-full bg-blue-500"></div>
+                        Fulfillment
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="py-8 bg-accent text-white border-y border-blue-700 group marquee-container">
+        <div class="marquee-content gap-8 items-center">
+            <!-- Repeated blocks for seamless loop -->
+            <div class="flex items-center gap-8">
+                <span class="font-display font-bold text-xl md:text-4xl opacity-90 group-hover:opacity-100 transition-opacity" data-es="CROSS DOCKING">CROSS DOCK</span>
+                <span class="w-3 h-3 bg-white/30 rounded-full"></span>
+                <span class="font-display font-bold text-xl md:text-4xl opacity-90 group-hover:opacity-100 transition-opacity" data-es="TRANSBORDO">TRANSLOAD</span>
+                <span class="w-3 h-3 bg-white/30 rounded-full"></span>
+                <span class="font-display font-bold text-xl md:text-4xl opacity-90 group-hover:opacity-100 transition-opacity" data-es="PICK & PACK">PICK & PACK</span>
+                <span class="w-3 h-3 bg-white/30 rounded-full"></span>
+                <span class="font-display font-bold text-xl md:text-4xl opacity-90 group-hover:opacity-100 transition-opacity" data-es="ALMACENAJE">STORAGE</span>
+                <span class="w-3 h-3 bg-white/30 rounded-full"></span>
+            </div>
+            <div class="flex items-center gap-8">
+                <span class="font-display font-bold text-xl md:text-4xl opacity-90 group-hover:opacity-100 transition-opacity" data-es="CROSS DOCKING">CROSS DOCK</span>
+                <span class="w-3 h-3 bg-white/30 rounded-full"></span>
+                <span class="font-display font-bold text-xl md:text-4xl opacity-90 group-hover:opacity-100 transition-opacity" data-es="TRANSBORDO">TRANSLOAD</span>
+                <span class="w-3 h-3 bg-white/30 rounded-full"></span>
+                <span class="font-display font-bold text-xl md:text-4xl opacity-90 group-hover:opacity-100 transition-opacity" data-es="PICK & PACK">PICK & PACK</span>
+                <span class="w-3 h-3 bg-white/30 rounded-full"></span>
+                <span class="font-display font-bold text-xl md:text-4xl opacity-90 group-hover:opacity-100 transition-opacity" data-es="ALMACENAJE">STORAGE</span>
+                <span class="w-3 h-3 bg-white/30 rounded-full"></span>
+            </div>
+            <div class="flex items-center gap-8">
+                <span class="font-display font-bold text-xl md:text-4xl opacity-90 group-hover:opacity-100 transition-opacity" data-es="CROSS DOCKING">CROSS DOCK</span>
+                <span class="w-3 h-3 bg-white/30 rounded-full"></span>
+                <span class="font-display font-bold text-xl md:text-4xl opacity-90 group-hover:opacity-100 transition-opacity" data-es="TRANSBORDO">TRANSLOAD</span>
+                <span class="w-3 h-3 bg-white/30 rounded-full"></span>
+                <span class="font-display font-bold text-xl md:text-4xl opacity-90 group-hover:opacity-100 transition-opacity" data-es="PICK & PACK">PICK & PACK</span>
+                <span class="w-3 h-3 bg-white/30 rounded-full"></span>
+                <span class="font-display font-bold text-xl md:text-4xl opacity-90 group-hover:opacity-100 transition-opacity" data-es="ALMACENAJE">STORAGE</span>
+                <span class="w-3 h-3 bg-white/30 rounded-full"></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- RATE BOARD -->
+    <section id="rates" class="py-16 md:py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="mb-16 reveal">
+                <span class="stencil-text text-slate-400 mb-4 block" data-es="Precios Transparentes">Transparent Pricing</span>
+                <h2 class="text-4xl md:text-5xl font-bold font-display" data-es="Tarifas Oficiales">Official Rate Board</h2>
+                <p class="mt-4 text-lg text-slate-600 max-w-2xl" data-es="Sin cargos ocultos. Cargos de Aduana exentos para importadores.">
+                    No hidden fees. Customs Clearance Fees waived for importers.
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Rate 1 -->
+                <div class="h-full border border-slate-200 rounded-2xl p-6 md:p-8 bg-slate-50 hover:bg-white hover:shadow-xl transition-all duration-500 hover:-translate-y-1 relative overflow-hidden group/card flex flex-col justify-between reveal reveal-delay-100">
+                    <div>
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="stencil-text text-accent" data-es="ALMACENAJE">STORAGE</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 font-display" data-es="Almacenaje">Storage</h3>
+                        <p class="text-slate-600 text-sm mb-6 min-h-[40px]" data-es="Tarifa promocional para nuevos clientes">Promotional rate for new clients</p>
+                    </div>
+                    <div>
+                        <div class="flex items-baseline gap-2 mb-6 border-t border-slate-200 pt-6">
+                            <span class="text-4xl font-bold font-mono text-primary">$15.00</span>
+                            <span class="text-slate-500 font-medium" data-es="/pallet/mes">/pallet/mo</span>
+                        </div>
+                        <a href="#quote" class="w-full py-4 rounded-xl border-2 border-slate-200 hover:border-accent hover:bg-accent hover:text-white transition-colors font-bold flex items-center justify-center gap-2 group/btn" data-es="Solicitar <span class='group-hover/btn:translate-x-1 transition-transform'>→</span>">
+                            Request <span class="group-hover/btn:translate-x-1 transition-transform">→</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Rate 2 -->
+                <div class="h-full border border-slate-200 rounded-2xl p-6 md:p-8 bg-slate-50 hover:bg-white hover:shadow-xl transition-all duration-500 hover:-translate-y-1 relative overflow-hidden group/card flex flex-col justify-between reveal reveal-delay-200">
+                    <div>
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="stencil-text text-accent" data-es="MANEJO">HANDLING</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 font-display" data-es="Transbordo Mismo Día">Transload Same Day</h3>
+                        <p class="text-slate-600 text-sm mb-6 min-h-[40px]" data-es="Descarga y carga el mismo día">Same-day unloading and loading</p>
+                    </div>
+                    <div>
+                        <div class="flex items-baseline gap-2 mb-6 border-t border-slate-200 pt-6">
+                            <span class="text-4xl font-bold font-mono text-primary">$9.00</span>
+                            <span class="text-slate-500 font-medium">/pallet</span>
+                        </div>
+                        <a href="#quote" class="w-full py-4 rounded-xl border-2 border-slate-200 hover:border-accent hover:bg-accent hover:text-white transition-colors font-bold flex items-center justify-center gap-2 group/btn" data-es="Solicitar <span class='group-hover/btn:translate-x-1 transition-transform'>→</span>">
+                            Request <span class="group-hover/btn:translate-x-1 transition-transform">→</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Rate 3 -->
+                <div class="h-full border border-slate-200 rounded-2xl p-6 md:p-8 bg-slate-50 hover:bg-white hover:shadow-xl transition-all duration-500 hover:-translate-y-1 relative overflow-hidden group/card flex flex-col justify-between reveal reveal-delay-300">
+                    <div>
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="stencil-text text-accent" data-es="MANEJO">HANDLING</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 font-display" data-es="Transbordo Día Siguiente">Transload Next Day</h3>
+                        <p class="text-slate-600 text-sm mb-6 min-h-[40px]" data-es="Procesado para salida al día siguiente">Processed for next-day departure</p>
+                    </div>
+                    <div>
+                        <div class="flex items-baseline gap-2 mb-6 border-t border-slate-200 pt-6">
+                            <span class="text-4xl font-bold font-mono text-primary">$10.50</span>
+                            <span class="text-slate-500 font-medium">/pallet</span>
+                        </div>
+                        <a href="#quote" class="w-full py-4 rounded-xl border-2 border-slate-200 hover:border-accent hover:bg-accent hover:text-white transition-colors font-bold flex items-center justify-center gap-2 group/btn" data-es="Solicitar <span class='group-hover/btn:translate-x-1 transition-transform'>→</span>">
+                            Request <span class="group-hover/btn:translate-x-1 transition-transform">→</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Rate 4 -->
+                <div class="h-full border border-slate-200 rounded-2xl p-6 md:p-8 bg-slate-50 hover:bg-white hover:shadow-xl transition-all duration-500 hover:-translate-y-1 relative overflow-hidden group/card flex flex-col justify-between reveal reveal-delay-100">
+                    <div>
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="stencil-text text-accent" data-es="FULFILLMENT">FULFILLMENT</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 font-display" data-es="Pick & Pack">Pick & Pack</h3>
+                        <p class="text-slate-600 text-sm mb-6 min-h-[40px]" data-es="Preparación de pedidos E-commerce">E-commerce order fulfillment</p>
+                    </div>
+                    <div>
+                        <div class="flex items-baseline gap-2 mb-6 border-t border-slate-200 pt-6">
+                            <span class="text-4xl font-bold font-mono text-primary">$10.00</span>
+                            <span class="text-slate-500 font-medium">/pallet</span>
+                        </div>
+                        <a href="#quote" class="w-full py-4 rounded-xl border-2 border-slate-200 hover:border-accent hover:bg-accent hover:text-white transition-colors font-bold flex items-center justify-center gap-2 group/btn" data-es="Solicitar <span class='group-hover/btn:translate-x-1 transition-transform'>→</span>">
+                            Request <span class="group-hover/btn:translate-x-1 transition-transform">→</span>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Rate 5 -->
+                <div class="h-full border border-slate-200 rounded-2xl p-6 md:p-8 bg-slate-50 hover:bg-white hover:shadow-xl transition-all duration-500 hover:-translate-y-1 relative overflow-hidden group/card flex flex-col justify-between reveal reveal-delay-200">
+                    <div>
+                        <div class="flex justify-between items-center mb-6">
+                            <span class="stencil-text text-accent">RECEIVING</span>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 font-display">Cross Dock</h3>
+                        <p class="text-slate-600 text-sm mb-6 min-h-[40px]">Immediate receiving and dispatch</p>
+                    </div>
+                    <div>
+                        <div class="flex items-baseline gap-2 mb-6 border-t border-slate-200 pt-6">
+                            <span class="text-4xl font-bold font-mono text-primary">$250.00</span>
+                            <span class="text-slate-500 font-medium">Mon-Fri</span>
+                        </div>
+                        <a href="#quote" class="w-full py-4 rounded-xl border-2 border-slate-200 hover:border-accent hover:bg-accent hover:text-white transition-colors font-bold flex items-center justify-center gap-2 group/btn">
+                            Request <span class="group-hover/btn:translate-x-1 transition-transform">→</span>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- ESTIMATOR -->
+    <section class="py-16 md:py-24 bg-slate-900 text-white overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Left: Controls -->
+                <div class="reveal">
+                    <div class="flex items-center gap-3 mb-6 text-accent">
+                        <i data-lucide="calculator" class="w-6 h-6"></i>
+                        <span class="stencil-text" data-es="Estimador de Costos">Cost Estimator</span>
+                    </div>
+                    <h2 class="text-4xl md:text-5xl font-bold mb-6 font-display" data-es="Calcula tu inversión al instante">Calculate your investment instantly</h2>
+                    <p class="text-base md:text-lg text-slate-400 mb-10" data-es="Aprovecha nuestra tarifa promocional para nuevos clientes de $15.00 por pallet mensual.">
+                        Take advantage of our promotional rate for new clients of $15.00 per pallet monthly.
+                    </p>
+
+                    <div class="space-y-8 glass-card bg-white/5! border-white/10! p-6 md:p-8 rounded-2xl">
+                        <!-- Pallets -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <label class="font-bold text-sm uppercase tracking-wider text-slate-300" data-es="Número de Pallets">Number of Pallets</label>
+                                <span class="font-mono font-bold text-accent" id="pallets-val">10</span>
+                            </div>
+                            <input type="range" id="pallets" min="1" max="100" value="10" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-accent" />
+                        </div>
+
+                        <!-- Months -->
+                        <div>
+                            <div class="flex justify-between mb-2">
+                                <label class="font-bold text-sm uppercase tracking-wider text-slate-300" data-es="Duración (Meses)">Duration (Months)</label>
+                                <span class="font-mono font-bold text-accent" id="months-val">1</span>
+                            </div>
+                            <input type="range" id="months" min="1" max="12" value="1" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-accent" />
+                        </div>
+
+                        <div class="pt-6 border-t border-white/10">
+                            <span class="text-slate-400 text-sm font-bold uppercase tracking-wider mb-2 block" data-es="Costo Estimado">Estimated Cost</span>
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-4xl text-slate-500 font-light">$</span>
+                                <span id="total-cost" class="text-5xl md:text-6xl font-bold font-mono tracking-tighter text-white">150.00</span>
+                            </div>
+                            <p class="text-xs text-emerald-400 font-bold mt-2 bg-emerald-400/10 inline-block px-2 py-1 rounded" data-es="Basado en tarifa promo de $15/pallet">Based on $15/pallet promo rate</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: Visual Stack -->
+                <div class="relative h-[400px] md:h-[600px] rounded-3xl bg-slate-800 border border-slate-700 overflow-hidden flex items-center justify-center p-8 reveal">
+                    <div class="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:40px_40px]"></div>
+                    <div class="iso-scene relative z-10 w-full h-full">
+                        <div id="pallet-stack" class="iso-grid">
+                            <!-- Injected via JS -->
+                        </div>
+                    </div>
+                    <div id="pallet-overflow" class="hidden absolute bottom-8 left-1/2 -translate-x-1/2 bg-slate-900/80 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-bold z-10"></div>
+                    <div class="absolute bottom-4 w-[80%] h-4 bg-slate-700 rounded-full blur-xl z-0 pointer-events-none"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="py-16 md:py-32 bg-slate-100 text-primary relative overflow-hidden">
+        <div class="absolute inset-0 opacity-20 pointer-events-none" style="background-image: repeating-linear-gradient(45deg, #cbd5e1 0, #cbd5e1 1px, transparent 0, transparent 50%); background-size: 20px 20px;"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-16 md:mb-20 reveal">
+                <span class="stencil-text text-accent mb-4 block" data-es="Operaciones CORE">CORE Operations</span>
+                <h2 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 font-display" data-es="Soluciones Logísticas Llave en Mano">Turn-Key Logistics Solutions</h2>
+                <p class="text-lg md:text-xl text-slate-600" data-es="Infraestructura optimizada para tu flujo de carga.">
+                    Optimized infrastructure for your cargo flow.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- Serv 1 -->
+                <div class="bg-white p-8 border border-slate-200 hover:border-accent hover:shadow-xl transition-all group reveal">
+                    <span class="stencil-text text-slate-400 mb-6 block text-xs" data-es="PASILLO 01 · ALMACENAJE">AISLE 01 · STORAGE</span>
+                    <i data-lucide="warehouse" class="w-10 h-10 mb-6 text-slate-700 group-hover:text-accent transition-colors"></i>
+                    <h3 class="text-2xl font-bold mb-3 font-display" data-es="Almacenaje Flexible">Flexible Storage</h3>
+                    <p class="text-slate-600" data-es="Corto y largo plazo en instalación segura 24/7.">Short and long-term in a secure 24/7 facility.</p>
+                </div>
+                <!-- Serv 2 -->
+                <div class="bg-white p-8 border border-slate-200 hover:border-accent hover:shadow-xl transition-all group reveal reveal-delay-100">
+                    <span class="stencil-text text-slate-400 mb-6 block text-xs" data-es="PASILLO 02 · TRÁNSITO">AISLE 02 · TRANSIT</span>
+                    <i data-lucide="arrow-right-left" class="w-10 h-10 mb-6 text-slate-700 group-hover:text-accent transition-colors"></i>
+                    <h3 class="text-2xl font-bold mb-3 font-display" data-es="Cross Dock">Cross Dock</h3>
+                    <p class="text-slate-600" data-es="Recepción y despacho eficiente sin almacenaje prolongado.">Efficient receiving and dispatch without prolonged storage.</p>
+                </div>
+                <!-- Serv 3 -->
+                <div class="bg-white p-8 border border-slate-200 hover:border-accent hover:shadow-xl transition-all group reveal reveal-delay-200">
+                    <span class="stencil-text text-slate-400 mb-6 block text-xs" data-es="PASILLO 03 · TRANSFERENCIA">AISLE 03 · TRANSFER</span>
+                    <i data-lucide="plane" class="w-10 h-10 mb-6 text-slate-700 group-hover:text-accent transition-colors"></i>
+                    <h3 class="text-2xl font-bold mb-3 font-display" data-es="Transbordo">Transload</h3>
+                    <p class="text-slate-600" data-es="Transferencia rápida de carga entre contenedores y camiones.">Fast cargo transfer between containers and trucks.</p>
+                </div>
+                <!-- Serv 4 -->
+                <div class="bg-white p-8 border border-slate-200 hover:border-accent hover:shadow-xl transition-all group reveal">
+                    <span class="stencil-text text-slate-400 mb-6 block text-xs" data-es="PASILLO 04 · PREPARACIÓN">AISLE 04 · FULFILL</span>
+                    <i data-lucide="box" class="w-10 h-10 mb-6 text-slate-700 group-hover:text-accent transition-colors"></i>
+                    <h3 class="text-2xl font-bold mb-3 font-display" data-es="Pick & Pack">Pick & Pack</h3>
+                    <p class="text-slate-600" data-es="Preparación precisa de órdenes paletizadas o cajas.">Precise preparation of palletized orders or boxes.</p>
+                </div>
+                <!-- Serv 5 -->
+                <div class="bg-white p-8 border border-slate-200 hover:border-accent hover:shadow-xl transition-all group reveal reveal-delay-100">
+                    <span class="stencil-text text-slate-400 mb-6 block text-xs" data-es="PASILLO 05 · E-COMM">AISLE 05 · E-COMM</span>
+                    <i data-lucide="shopping-cart" class="w-10 h-10 mb-6 text-slate-700 group-hover:text-accent transition-colors"></i>
+                    <h3 class="text-2xl font-bold mb-3 font-display" data-es="E-Commerce">E-Commerce</h3>
+                    <p class="text-slate-600" data-es="Preparación de pedidos para tiendas online.">Complete fulfillment for online stores.</p>
+                </div>
+                <!-- Serv 6 -->
+                <div class="bg-white p-8 border border-slate-200 hover:border-accent hover:shadow-xl transition-all group reveal reveal-delay-200">
+                    <span class="stencil-text text-slate-400 mb-6 block text-xs" data-es="PASILLO 06 · DATOS">AISLE 06 · DATA</span>
+                    <i data-lucide="barcode" class="w-10 h-10 mb-6 text-slate-700 group-hover:text-accent transition-colors"></i>
+                    <h3 class="text-2xl font-bold mb-3 font-display" data-es="Gestión de Inventario">Inventory Mgmt</h3>
+                    <p class="text-slate-600" data-es="Acceso remoto en tiempo real al inventario.">Real-time remote access to inventory.</p>
+                </div>
+                <!-- Serv 7 -->
+                <div class="bg-white p-8 border border-slate-200 hover:border-accent hover:shadow-xl transition-all group reveal">
+                    <span class="stencil-text text-slate-400 mb-6 block text-xs" data-es="PASILLO 07 · ESPECIAL">AISLE 07 · SPECIAL</span>
+                    <i data-lucide="package" class="w-10 h-10 mb-6 text-slate-700 group-hover:text-accent transition-colors"></i>
+                    <h3 class="text-2xl font-bold mb-3 font-display" data-es="Manejo Especializado">Specialized Handling</h3>
+                    <p class="text-slate-600" data-es="Manejo cuidadoso de carga frágil o sobredimensionada.">Careful handling of fragile or oversized cargo.</p>
+                </div>
+                <!-- Serv 8 -->
+                <div class="bg-white p-8 border border-slate-200 hover:border-accent hover:shadow-xl transition-all group reveal reveal-delay-100">
+                    <span class="stencil-text text-slate-400 mb-6 block text-xs" data-es="PASILLO 08 · EVENTOS">AISLE 08 · EVENTS</span>
+                    <i data-lucide="warehouse" class="w-10 h-10 mb-6 text-slate-700 group-hover:text-accent transition-colors"></i>
+                    <h3 class="text-2xl font-bold mb-3 font-display" data-es="Cajas para Trade Shows">Trade Show Crates</h3>
+                    <p class="text-slate-600" data-es="Almacenaje seguro de cajas entre eventos.">Secure storage of crates between events.</p>
+                </div>
+                <!-- Serv 9 -->
+                <div class="bg-white p-8 border border-slate-200 hover:border-accent hover:shadow-xl transition-all group reveal reveal-delay-200">
+                    <span class="stencil-text text-slate-400 mb-6 block text-xs" data-es="PASILLO 09 · DISTRIBUCIÓN">AISLE 09 · DISPATCH</span>
+                    <i data-lucide="truck" class="w-10 h-10 mb-6 text-slate-700 group-hover:text-accent transition-colors"></i>
+                    <h3 class="text-2xl font-bold mb-3 font-display" data-es="Última Milla y Drayage">Last Mile & Drayage</h3>
+                    <p class="text-slate-600" data-es="Carga de vehículos y distribución nacional.">Vehicle loading and nationwide distribution.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FACILITY -->
+    <section id="facility" class="py-16 md:py-24 bg-white text-primary relative overflow-hidden">
+        <!-- Dock Door Transition Element -->
+        <div id="dock-door" class="dock-door flex items-center justify-center">
+            <div class="stencil-text text-white/20 text-5xl md:text-8xl tracking-widest font-display transform -rotate-12 select-none">DOCK 01</div>
+        </div>
+
+        <div class="absolute top-0 right-0 w-1/2 h-full opacity-5 pointer-events-none">
+            <svg viewBox="0 0 100 100" preserveAspectRatio="none" class="w-full h-full fill-current text-slate-300">
+                <polygon points="100,0 0,100 100,100" />
+            </svg>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                <!-- Text -->
+                <div>
+                    <div class="reveal">
+                        <span class="stencil-text text-accent mb-4 block" data-es="Sede Principal">Headquarters</span>
+                        <h2 class="text-4xl md:text-5xl font-bold mb-6 font-display" data-es="Instalación Clase A en Doral">Class A Facility in Doral</h2>
+                        <p class="text-lg md:text-xl text-slate-600 mb-10 md:mb-12 max-w-lg" data-es="Equipada para manejar operaciones de alto volumen con los más estrictos estándares.">
+                            Equipped to handle high-volume logistics operations with the strictest security and efficiency standards.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-8 mb-12">
+                        <!-- Stat 1 -->
+                        <div class="reveal">
+                            <i data-lucide="map" class="w-8 h-8 text-accent mb-4"></i>
+                            <div class="text-3xl font-mono font-bold mb-1">30,000</div>
+                            <div class="text-sm text-slate-500 font-bold uppercase" data-es="pies cuadrados">sq ft</div>
+                            <p class="text-sm mt-2 font-medium text-slate-700" data-es="Instalación Certificada">Certified Facility</p>
+                        </div>
+                        <!-- Stat 2 -->
+                        <div class="reveal reveal-delay-100">
+                            <i data-lucide="shield-check" class="w-8 h-8 text-accent mb-4"></i>
+                            <div class="text-3xl font-mono font-bold mb-1">24/7</div>
+                            <div class="text-sm text-slate-500 font-bold uppercase" data-es="Seguridad">Security</div>
+                            <p class="text-sm mt-2 font-medium text-slate-700" data-es="Vigilancia de última generación">State-of-the-art surveillance</p>
+                        </div>
+                        <!-- Stat 3 -->
+                        <div class="reveal">
+                            <i data-lucide="door-open" class="w-8 h-8 text-accent mb-4"></i>
+                            <div class="text-3xl font-mono font-bold mb-1" data-es="Andén">Dock</div>
+                            <div class="text-sm text-slate-500 font-bold uppercase" data-es="Altura">Height</div>
+                            <p class="text-sm mt-2 font-medium text-slate-700" data-es="Múltiples andenes de carga">Multiple loading docks</p>
+                        </div>
+                        <!-- Stat 4 -->
+                        <div class="reveal reveal-delay-100">
+                            <i data-lucide="arrow-up-right" class="w-8 h-8 text-accent mb-4"></i>
+                            <div class="text-3xl font-mono font-bold mb-1" data-es="Rampas">Ramps</div>
+                            <div class="text-sm text-slate-500 font-bold uppercase" data-es="Acceso">Access</div>
+                            <p class="text-sm mt-2 font-medium text-slate-700" data-es="Acceso para varios tipos de vehículos">Access for various vehicle types</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Image Grid -->
+                <div class="grid grid-cols-2 gap-4 h-[600px] reveal">
+                    <div class="space-y-4 h-full">
+                        <div class="bg-slate-200 rounded-2xl h-1/2 overflow-hidden relative">
+                            <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&q=80" alt="Warehouse Interior" width="800" height="600" loading="lazy" decoding="async" class="object-cover w-full h-full" />
+                        </div>
+                        <div class="bg-primary rounded-2xl h-1/2 p-8 text-white flex flex-col justify-end">
+                            <span class="stencil-text text-accent mb-2" data-es="Ubicación">Location</span>
+                            <h3 class="text-2xl font-bold font-display">Miami, FL</h3>
+                        </div>
+                    </div>
+                    <div class="bg-slate-200 rounded-2xl h-full overflow-hidden relative">
+                        <img src="https://images.unsplash.com/photo-1553413077-190dd305871c?auto=format&fit=crop&q=80" alt="Logistics Operations" width="800" height="1200" loading="lazy" decoding="async" class="object-cover w-full h-full" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY PREMIER -->
+    <section class="py-16 md:py-24 bg-slate-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            
+            <div class="mb-16 reveal">
+                <span class="stencil-text text-slate-400 mb-4 block" data-es="Nuestra Diferencia">Our Difference</span>
+                <h2 class="text-4xl md:text-5xl font-bold font-display" data-es="Por Qué Elegir Premier">Why Choose Premier</h2>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 h-full flex flex-col items-center text-center hover:border-accent transition-colors group reveal">
+                    <div class="w-16 h-16 bg-slate-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/10 transition-colors">
+                        <i data-lucide="award" class="w-8 h-8 text-slate-600 group-hover:text-accent transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 font-display" data-es="Propiedad de Mujeres">Woman Owned</h3>
+                    <p class="text-slate-600 text-sm" data-es="Pequeña empresa certificada. Comprometidas con la excelencia.">Certified Small Business. Committed to diversity and service excellence.</p>
+                </div>
+                
+                <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 h-full flex flex-col items-center text-center hover:border-accent transition-colors group reveal reveal-delay-100">
+                    <div class="w-16 h-16 bg-slate-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/10 transition-colors">
+                        <i data-lucide="briefcase" class="w-8 h-8 text-slate-600 group-hover:text-accent transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 font-display" data-es="Más de 25 Años">25+ Years</h3>
+                    <p class="text-slate-600 text-sm" data-es="De experiencia. Conocemos los retos y cómo resolverlos.">Of combined experience. We know logistics challenges and how to solve them.</p>
+                </div>
+
+                <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 h-full flex flex-col items-center text-center hover:border-accent transition-colors group reveal reveal-delay-200">
+                    <div class="w-16 h-16 bg-slate-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/10 transition-colors">
+                        <i data-lucide="check-circle" class="w-8 h-8 text-slate-600 group-hover:text-accent transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 font-display" data-es="Llave en Mano">Turn-key Warehouse</h3>
+                    <p class="text-slate-600 text-sm" data-es="Soluciones integrales para simplificar tu logística.">End-to-end comprehensive solutions to simplify your supply chain.</p>
+                </div>
+
+                <div class="bg-white p-6 md:p-8 rounded-2xl border border-slate-200 h-full flex flex-col items-center text-center hover:border-accent transition-colors group reveal reveal-delay-300">
+                    <div class="w-16 h-16 bg-slate-50 rounded-xl flex items-center justify-center mb-6 group-hover:bg-accent/10 transition-colors">
+                        <i data-lucide="heart-handshake" class="w-8 h-8 text-slate-600 group-hover:text-accent transition-colors"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3 font-display" data-es="Tranquilidad">Peace of Mind</h3>
+                    <p class="text-slate-600 text-sm" data-es="Tu carga segura y organizada. Nosotros nos ocupamos del estrés.">Your cargo secure, organized, and accessible. We take care of the stress.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ ACCORDION -->
+    <section class="py-16 md:py-24 bg-slate-100" id="faq">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="stencil-text text-accent mb-4 block" data-es="PREGUNTAS FRECUENTES">FAQS</span>
+                <h2 class="text-4xl md:text-5xl font-bold font-display" data-es="Preguntas Frecuentes">Frequently Asked Questions</h2>
+            </div>
+            <div class="space-y-4">
+                <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden reveal">
+                    <summary class="flex justify-between items-center font-bold font-display cursor-pointer list-none p-6 text-lg">
+                        <span data-es="¿Cuáles son sus horarios de operación?">What are your operating hours?</span>
+                        <span class="transition-transform group-open:rotate-180">
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-accent"></i>
+                        </span>
+                    </summary>
+                    <div class="p-6 pt-0 text-slate-600 border-t border-slate-100 mt-2">
+                        <p data-es="Operamos de Lunes a Viernes de 8:00 AM a 6:00 PM, y los fines de semana (Sábado y Domingo) de 9:00 AM a 1:00 PM.">
+                            We operate Monday to Friday from 8:00 AM to 6:00 PM, and on weekends (Saturday and Sunday) from 9:00 AM to 1:00 PM.
+                        </p>
+                    </div>
+                </details>
+                
+                <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden reveal reveal-delay-100">
+                    <summary class="flex justify-between items-center font-bold font-display cursor-pointer list-none p-6 text-lg">
+                        <span data-es="¿Dónde están ubicados?">Where are you located?</span>
+                        <span class="transition-transform group-open:rotate-180">
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-accent"></i>
+                        </span>
+                    </summary>
+                    <div class="p-6 pt-0 text-slate-600 border-t border-slate-100 mt-2">
+                        <p data-es="Nuestras instalaciones están ubicadas en Miami en: 3600 NW 114th Ave, Unit A, Doral, FL 33178.">
+                            Our facility is strategically located in Miami at 3600 NW 114th Ave, Unit A, Doral, FL 33178.
+                        </p>
+                    </div>
+                </details>
+
+                <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden reveal reveal-delay-200">
+                    <summary class="flex justify-between items-center font-bold font-display cursor-pointer list-none p-6 text-lg">
+                        <span data-es="¿Qué servicios logísticos ofrecen?">What logistics services do you offer?</span>
+                        <span class="transition-transform group-open:rotate-180">
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-accent"></i>
+                        </span>
+                    </summary>
+                    <div class="p-6 pt-0 text-slate-600 border-t border-slate-100 mt-2">
+                        <p data-es="Ofrecemos soluciones integrales: Almacenamiento a corto y largo plazo, Cross-Docking / Transload, procesamiento de pedidos, Full Truckload (FTL) / LTL, y Drayage de contenedores.">
+                            We offer comprehensive solutions including short and long-term storage, Cross-Docking / Transload services, order fulfillment, Nationwide FTL/LTL, and Container Drayage.
+                        </p>
+                    </div>
+                </details>
+                
+                <details class="group bg-white rounded-xl border border-slate-200 overflow-hidden reveal">
+                    <summary class="flex justify-between items-center font-bold font-display cursor-pointer list-none p-6 text-lg">
+                        <span data-es="¿Ofrecen despacho de aduanas?">Do you offer customs clearance?</span>
+                        <span class="transition-transform group-open:rotate-180">
+                            <i data-lucide="chevron-down" class="w-5 h-5 text-accent"></i>
+                        </span>
+                    </summary>
+                    <div class="p-6 pt-0 text-slate-600 border-t border-slate-100 mt-2">
+                        <p data-es="Sí, ofrecemos asistencia completa y despacho de aduanas para importadores.">
+                            Yes, we provide full assistance and customs clearance for importers, ensuring a smooth process.
+                        </p>
+                    </div>
+                </details>
+            </div>
+        </div>
+    </section>
+
+    <!-- QUOTE FORM -->
+    <section class="py-16 md:py-24 bg-white relative" id="quote">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <span class="stencil-text text-accent mb-4 block" data-es="Inicia Operaciones">Start Operations</span>
+                <h2 class="text-4xl md:text-5xl font-bold font-display" data-es="Solicitar Cotización">Request a Quote</h2>
+            </div>
+
+            <!-- Web3Forms integration -->
+            <form action="https://api.web3forms.com/submit" method="POST" class="space-y-8 glass p-6 sm:p-8 md:p-12 rounded-2xl md:rounded-3xl border border-slate-200 shadow-xl reveal">
+                
+                <!-- Use a testing key or actual access key -->
+                <input type="hidden" name="access_key" value="YOUR_ACCESS_KEY_HERE">
+                <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
+
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="relative">
+                        <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide" data-es="Nombre Completo">Full Name</label>
+                        <input required type="text" name="name" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" />
+                    </div>
+                    <div class="relative">
+                        <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide" data-es="Empresa">Company</label>
+                        <input type="text" name="company" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" />
+                    </div>
+                    <div class="relative">
+                        <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide" data-es="Correo Electrónico">Email</label>
+                        <input required type="email" name="email" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" />
+                    </div>
+                    <div class="relative">
+                        <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide" data-es="Teléfono">Phone</label>
+                        <input required type="tel" name="phone" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" />
+                    </div>
+                </div>
+
+                <div class="border-t border-slate-200 pt-8 mt-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div class="relative">
+                        <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide" data-es="Servicio Principal">Main Service</label>
+                        <select required name="service" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent appearance-none">
+                            <option value="" disabled selected data-es="Seleccionar...">Select...</option>
+                            <option value="storage" data-es="Almacenaje ($15/pallet/mes)">Storage ($15/pallet/mo)</option>
+                            <option value="transload">Transload</option>
+                            <option value="crossdock">Cross Dock</option>
+                            <option value="pickpack">Pick & Pack</option>
+                            <option value="other" data-es="Otro">Other</option>
+                        </select>
+                    </div>
+                    <div class="relative">
+                        <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide" data-es="Volumen Estimado">Estimated Volume</label>
+                        <input required type="number" name="volume" placeholder="Ex: 20" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent transition-all" />
+                    </div>
+                    
+                    <div class="relative md:col-span-2">
+                        <label class="block text-sm font-bold text-slate-700 mb-2 uppercase tracking-wide" data-es="Duración / Frecuencia">Duration / Frequency</label>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
+                            <label class="cursor-pointer">
+                                <input type="radio" name="frequency" class="peer sr-only" value="daily" required />
+                                <div class="text-center px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl peer-checked:bg-accent peer-checked:text-white peer-checked:border-accent font-bold transition-all hover:border-slate-300" data-es="Diario">Daily</div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="frequency" class="peer sr-only" value="weekly" />
+                                <div class="text-center px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl peer-checked:bg-accent peer-checked:text-white peer-checked:border-accent font-bold transition-all hover:border-slate-300" data-es="Semanal">Weekly</div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="frequency" class="peer sr-only" value="monthly" />
+                                <div class="text-center px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl peer-checked:bg-accent peer-checked:text-white peer-checked:border-accent font-bold transition-all hover:border-slate-300" data-es="Mensual">Monthly</div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="frequency" class="peer sr-only" value="yearly" />
+                                <div class="text-center px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl peer-checked:bg-accent peer-checked:text-white peer-checked:border-accent font-bold transition-all hover:border-slate-300" data-es="Anual">Yearly</div>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-6">
+                    <button id="quote-submit-btn" type="submit" class="w-full bg-primary hover:bg-slate-800 text-white font-bold py-5 rounded-xl flex items-center justify-center gap-3 transition-all group">
+                        <span class="btn-text" data-es="Enviar Solicitud">Submit Request</span>
+                        <i data-lucide="send" class="w-5 h-5 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform"></i>
+                    </button>
+                    <p class="text-center text-sm text-slate-500 mt-4 font-medium" data-es="Respuesta usualmente en menos de 2 horas hábiles.">Response typically in under 2 business hours.</p>
+                </div>
+            </form>
+        </div>
+    </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-primary text-slate-300 py-12 md:py-16 border-t-4 border-accent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+            
+            <div class="lg:col-span-2">
+                <h2 class="text-2xl font-bold text-white mb-6 font-display">Premier Warehouse & Logistics Management</h2>
+                <p class="mb-6 max-w-md text-slate-400" data-es="Pequeña empresa certificada propiedad de mujeres ofreciendo soluciones de primer nivel con más de 25 años de experiencia combinada.">
+                    Woman Owned Small Business offering top-tier logistics solutions with over 25 years of combined experience.
+                </p>
+                <div class="flex gap-4">
+                    <span class="px-3 py-1 bg-slate-800 rounded-full text-xs font-bold border border-slate-700">MyFDA++</span>
+                    <span class="px-3 py-1 bg-slate-800 rounded-full text-xs font-bold border border-slate-700">C-TPAT Compliant</span>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="text-white font-bold mb-6 stencil-text" data-es="Contacto">Contact</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="phone" class="w-5 h-5 text-accent shrink-0 mt-0.5"></i>
+                        <a href="tel:3058775964" class="hover:text-white transition-colors font-bold">305.877.5964</a>
+                    </li>
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="mail" class="w-5 h-5 text-accent shrink-0 mt-0.5"></i>
+                        <a href="mailto:info@premierwarehouse.com" class="hover:text-white transition-colors">info@premierwarehouse.com</a>
+                    </li>
+                    <li class="flex items-start gap-3 mt-4">
+                        <span class="bg-emerald-500/20 text-emerald-400 text-xs font-bold px-2 py-1 rounded border border-emerald-500/30">Hablamos Español</span>
+                    </li>
+                </ul>
+            </div>
+
+            <div>
+                <h3 class="text-white font-bold mb-6 stencil-text" data-es="Ubicación">Location</h3>
+                <ul class="space-y-4">
+                    <li class="flex items-start gap-3">
+                        <i data-lucide="map-pin" class="w-5 h-5 text-accent shrink-0 mt-0.5"></i>
+                        <span data-es="Doral, Miami FL<br/>A minutos de MIA y el Puerto de Miami">Doral, Miami FL<br/>Minutes from MIA & Port of Miami</span>
+                    </li>
+                    <li class="flex items-start gap-3 mt-4">
+                        <i data-lucide="clock" class="w-5 h-5 text-accent shrink-0 mt-0.5"></i>
+                        <span data-es="Horarios de operación flexibles<br/>Seguridad 24/7">Flexible hours of operation<br/>24/7 Security</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-16 pt-8 border-t border-slate-800 text-sm text-center text-slate-500">
+            <p>&copy; <span id="year">2026</span> Premier Warehouse & Logistics Management Corp. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- FLOATING CONTACT -->
+    <div id="floating-contact" class="fixed bottom-6 right-6 z-50 flex items-center gap-4 translate-y-24 opacity-0 transition-all duration-500">
+        <div class="bg-white px-4 py-2 rounded-full shadow-lg border border-slate-200 hidden md:block">
+            <span class="text-sm font-bold text-slate-700">Need help?</span>
+        </div>
+        <a href="tel:3058775964" class="w-14 h-14 bg-accent hover:bg-blue-700 text-white rounded-full flex items-center justify-center shadow-2xl transition-transform hover:scale-110" aria-label="Call now">
+            <i data-lucide="phone" class="w-6 h-6 animate-pulse"></i>
+        </a>
+    </div>
+
+    <!-- Main Logic -->
+    <script src="./js/main.js"></script>
+</body>
+</html>
