@@ -13,11 +13,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     window.addEventListener('scroll', () => {
         if (window.scrollY > 20) {
-            navbar.classList.add('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'py-4');
-            navbar.classList.remove('bg-transparent', 'py-6');
+            navbar.classList.add('nav-scrolled');
         } else {
-            navbar.classList.add('bg-transparent', 'py-6');
-            navbar.classList.remove('bg-white/90', 'backdrop-blur-md', 'shadow-sm', 'py-4');
+            navbar.classList.remove('nav-scrolled');
         }
     });
 
