@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     menuBtn.addEventListener('click', () => {
         isMenuOpen = !isMenuOpen;
+        menuBtn.setAttribute('aria-expanded', isMenuOpen);
         if (isMenuOpen) {
             mobileMenu.classList.remove('hidden');
             setTimeout(() => {
@@ -42,6 +43,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function closeMenu() {
         isMenuOpen = false;
+        menuBtn.setAttribute('aria-expanded', 'false');
         mobileMenu.classList.remove('opacity-100', 'translate-y-0');
         mobileMenu.classList.add('opacity-0', '-translate-y-4');
         setTimeout(() => {
@@ -237,7 +239,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     headers: { 'Accept': 'application/json' },
                     body: new FormData(quoteForm)
                 });
-                setBtnState(res.ok ? 'btn-success' : 'btn-error');
+                const success = res.ok;
+                setBtnState(success ? 'btn-success' : 'btn-error');
+                if (success) {
+                    // Scroll suave al form para que el usuario vea la confirmación
+                    setTimeout(() => {
+                        quoteForm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    }, 100);
+                }
             } catch {
                 setBtnState('btn-error');
             }
@@ -276,16 +285,23 @@ document.addEventListener('DOMContentLoaded', () => {
             { en: document.getElementById('lang-en-mobile'), es: document.getElementById('lang-es-mobile') }
         ];
 
-        toggles.forEach(t => {
-            if (!t.en || !t.es) return;
+        // Update ALL toggle buttons (desktop + mobile)
+        const allToggles = document.querySelectorAll('#lang-toggle-desktop, #lang-toggle-mobile');
+        allToggles.forEach(toggle => {
+            const enSpan = toggle.querySelector('[id$="-en-desktop"], [id$="-en-mobile"]');
+            const esSpan = toggle.querySelector('[id$="-es-desktop"], [id$="-es-mobile"]');
+            if (!enSpan || !esSpan) return;
             if (lang === 'es') {
-                t.es.classList.add('text-accent');
-                t.en.classList.remove('text-accent');
+                esSpan.classList.add('text-accent');
+                enSpan.classList.remove('text-accent');
             } else {
-                t.en.classList.add('text-accent');
-                t.es.classList.remove('text-accent');
+                enSpan.classList.add('text-accent');
+                esSpan.classList.remove('text-accent');
             }
         });
+
+        // Refresh icons after language change (Lucide re-renders)
+        refreshIcons();
     }
 
     if (toggleDesktop) {
