@@ -64,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const target = document.querySelector(targetId);
             if (target) {
                 e.preventDefault();
-                const offsetTop = target.getBoundingClientRect().top + window.scrollY - 80;
+                const offsetTop = target.getBoundingClientRect().top + window.scrollY - 104;
                 window.scrollTo({ top: offsetTop, behavior: 'smooth' });
             }
         });
