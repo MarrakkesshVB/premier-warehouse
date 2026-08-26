@@ -109,15 +109,17 @@
 
     <main>
     <!-- HERO -->
-    <section id="hero" class="relative h-svh min-h-[640px] flex flex-col justify-center overflow-hidden bg-slate-950 pt-24 md:pt-28 pb-4 md:pb-6">
+    <section id="hero" class="relative h-svh min-h-[640px] flex flex-col justify-center overflow-hidden bg-slate-100 pt-24 md:pt-28 pb-4 md:pb-6">
         <!-- Ambient: mismo webp, blur + scale (sin bordes limpios) -->
         <img src="./assets/background.webp" alt="" aria-hidden="true" width="2560" height="1440" decoding="async" class="hero-ambient" />
-        <div class="absolute inset-0 bg-slate-950/45"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-transparent to-slate-50"></div>
+        <div class="absolute inset-0 bg-white/45"></div>
 
         <!-- Vitrina glass -->
         <div class="w-full h-full px-4 sm:px-6 lg:px-8 flex flex-col">
         <div class="hero-panel relative z-20 w-full max-w-[1800px] mx-auto rounded-[2rem] overflow-hidden h-full flex flex-col">
+        <!-- Foto full-bleed: llena todo el panel; el texto vive encima -->
+        <img src="./assets/background.webp" alt="Premier Warehouse facility — racking aisles" width="2560" height="1440" fetchpriority="high" decoding="async" class="hero-photo" />
+        <div class="hero-scrim" aria-hidden="true"></div>
         <div id="hero-content" class="relative z-20 w-full px-6 lg:px-10 pt-10 md:pt-14 pb-2 text-center flex-none">
             <div class="max-w-4xl mx-auto">
                 <div class="flex items-center justify-center gap-3 mb-6">
@@ -132,16 +134,16 @@
                 
 
                 <div class="reveal reveal-delay-400 flex flex-col sm:flex-row gap-4 justify-center">
-                    <a href="#quote" class="w-full sm:w-auto bg-primary hover:bg-slate-800 text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-2 group" data-es="<span>Cotizar Ahora</span><span class='group-hover:translate-x-1 transition-transform'>→</span>">
+                    <a href="#quote" class="w-full sm:w-auto bg-accent hover:bg-accent-dark text-white px-8 py-4 rounded-xl font-bold transition-all flex items-center justify-center gap-2 group btn-glow" data-es="<span>Cotizar Ahora</span><span class='group-hover:translate-x-1 transition-transform'>→</span>">
                         <span>Get a Quote</span>
                         <span class="group-hover:translate-x-1 transition-transform">→</span>
                     </a>
-                    <a href="tel:3058775964" class="w-full sm:w-auto glass hover:bg-white text-primary px-8 py-4 rounded-xl font-bold transition-all border-slate-200 border flex items-center justify-center gap-2" data-es="Llámanos al 305.877.5964">
+                    <a href="tel:3058775964" class="w-full sm:w-auto bg-white/85 hover:bg-white text-primary px-8 py-4 rounded-xl font-bold transition-all border border-white/70 flex items-center justify-center gap-2" data-es="Llámanos al 305.877.5964">
                         Call us at 305.877.5964
                     </a>
                 </div>
 
-                <div class="mt-8 md:mt-10 flex flex-wrap items-center justify-center gap-6 text-sm font-bold text-slate-500 stencil-text reveal reveal-delay-500">
+                <div class="mt-8 md:mt-10 flex flex-wrap items-center justify-center gap-6 text-sm font-bold text-slate-600 stencil-text reveal reveal-delay-500">
                     <div class="flex items-center gap-2" data-es="<div class='w-2 h-2 rounded-full bg-emerald-500'></div>Seguridad 24/7">
                         <div class="w-2 h-2 rounded-full bg-emerald-500"></div>
                         24/7 Security
@@ -156,11 +158,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Foto vitrina: se disuelve hacia arriba en el glass -->
-        <div class="relative flex-1 min-h-0 mt-6 md:mt-8">
-            <img src="./assets/background.webp" alt="Premier Warehouse facility — red racking aisles" width="2560" height="1440" fetchpriority="high" decoding="async" class="hero-photo" />
         </div>
         </div>
         </div>
