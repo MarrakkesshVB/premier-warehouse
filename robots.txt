@@ -1,0 +1,19 @@
+# Premier Warehouse & Logistics Management
+# AI assistants welcome (AEO)
+
+User-agent: *
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+Sitemap: https://marrakkesshvb.github.io/premier-warehouse/sitemap.xml
