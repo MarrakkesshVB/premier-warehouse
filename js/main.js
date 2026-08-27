@@ -251,6 +251,53 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // 11. Form adaptativo: ruta obligatoria en flete + turnaround en transload
+    if (quoteForm) {
+        const serviceSelect = quoteForm.querySelector('[name="service_type"]');
+        const FREIGHT_SERVICES = ['transload', 'crossdock'];
+        const frequencyGroup = document.getElementById('frequency-group');
+        const turnaroundGroup = document.getElementById('turnaround-group');
+        const syncServiceFields = () => {
+            const value = serviceSelect.value;
+            const needRoute = FREIGHT_SERVICES.includes(value);
+            const isTransload = value === 'transload';
+
+            // Ruta obligatoria solo en servicios de flete
+            ['shipping_from', 'destination_country', 'destination_city'].forEach(n => {
+                const field = quoteForm.querySelector(`[name="${n}"]`);
+                if (!field) return;
+                if (needRoute) field.setAttribute('required', '');
+                else field.removeAttribute('required');
+                const wrap = field.closest('.relative');
+                const tag = wrap ? wrap.querySelector('.opt-tag') : null;
+                if (tag) tag.classList.toggle('hidden', needRoute);
+            });
+
+            // Transload → turnaround (tier de precio); resto → frequency
+            if (frequencyGroup && turnaroundGroup) {
+                frequencyGroup.classList.toggle('hidden', isTransload);
+                turnaroundGroup.classList.toggle('hidden', !isTransload);
+                const freqAnchor = frequencyGroup.querySelector('input[value="one_time"]');
+                const turnAnchor = turnaroundGroup.querySelector('input[value="same_day"]');
+                if (freqAnchor) {
+                    if (isTransload) freqAnchor.removeAttribute('required');
+                    else freqAnchor.setAttribute('required', '');
+                }
+                if (turnAnchor) {
+                    if (isTransload) turnAnchor.setAttribute('required', '');
+                    else turnAnchor.removeAttribute('required');
+                }
+                // Sin valores residuales de grupos ocultos en el lead
+                frequencyGroup.querySelectorAll('input').forEach(r => { if (isTransload) r.checked = false; });
+                turnaroundGroup.querySelectorAll('input').forEach(r => { if (!isTransload) r.checked = false; });
+            }
+        };
+        if (serviceSelect) {
+            serviceSelect.addEventListener('change', syncServiceFields);
+            syncServiceFields();
+        }
+    }
+
     // 10. Bilingual Toggle (EN / ES)
     let currentLang = 'en';
     const toggleDesktop = document.getElementById('lang-toggle-desktop');
