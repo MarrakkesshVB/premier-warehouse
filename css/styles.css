@@ -72,6 +72,64 @@ body {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
+/* Border Beam: tarjetas invisibles + luz que recorre el perímetro */
+@property --beam-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+.glass-card-stat {
+  position: relative;
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.0);
+  border-radius: 1.5rem;
+}
+
+/* Halo suave superior para asentar el contenido */
+.glass-card-stat::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  background: radial-gradient(120% 90% at 50% 0%, rgba(255, 255, 255, 0.07), transparent 0%);
+}
+
+/* El haz: conic-gradient rotando, recortado a un anillo de 1.5px */
+.glass-card-stat::before {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(from var(--beam-angle),
+    transparent 0deg,
+    transparent 250deg,
+    rgba(238, 8, 8, 0) 250deg,
+    rgba(238, 8, 8, 0.7) 300deg,
+    rgba(255, 190, 140, 0.9) 330deg,
+    rgba(255, 255, 255, 1) 345deg,
+    rgba(140, 200, 255, 0.7) 355deg,
+    transparent 360deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  mask-composite: exclude;
+  animation: beam-travel 6s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes beam-travel {
+  to { --beam-angle: 360deg; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-card-stat::before {
+    animation: none;
+  }
+}
+
 /* 3D Estimator Grid */
 .iso-scene {
   perspective: 1000px;
