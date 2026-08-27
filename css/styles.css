@@ -130,6 +130,21 @@ body {
   }
 }
 
+/* Quote form: ritmo vertical comprimido para caber en 100vh */
+#quote input[type="text"],
+#quote input[type="email"],
+#quote input[type="tel"],
+#quote input[type="number"],
+#quote select,
+#quote textarea {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+#quote .peer + div {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
+}
+
 /* 3D Estimator Grid */
 .iso-scene {
   perspective: 1000px;
