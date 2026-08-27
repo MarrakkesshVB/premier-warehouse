@@ -108,7 +108,29 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalCost = document.getElementById('total-cost');
     const palletStack = document.getElementById('pallet-stack');
     const palletOverflow = document.getElementById('pallet-overflow');
+    const unitMonthsBtn = document.getElementById('unit-months');
+    const unitDaysBtn = document.getElementById('unit-days');
+    const durationNote = document.getElementById('duration-note');
     const rate = 15;
+    let durationUnit = 'months';
+
+    function setDurationUnit(u) {
+        durationUnit = u;
+        const isMonths = u === 'months';
+        monthsInput.max = isMonths ? 12 : 45;
+        monthsInput.value = isMonths ? 1 : 10;
+        monthsVal.textContent = monthsInput.value;
+        unitMonthsBtn.className = 'px-2 py-1 text-xs font-bold ' + (isMonths ? 'bg-accent text-white' : 'bg-slate-700 text-slate-300');
+        unitDaysBtn.className = 'px-2 py-1 text-xs font-bold ' + (isMonths ? 'bg-slate-700 text-slate-300' : 'bg-accent text-white');
+        unitMonthsBtn.setAttribute('aria-pressed', String(isMonths));
+        unitDaysBtn.setAttribute('aria-pressed', String(!isMonths));
+        if (durationNote) durationNote.classList.toggle('hidden', isMonths);
+        const estMonthly = document.getElementById('estimate-monthly');
+        const estDaily = document.getElementById('estimate-daily');
+        if (estMonthly) estMonthly.classList.toggle('hidden', !isMonths);
+        if (estDaily) estDaily.classList.toggle('hidden', isMonths);
+        updateEstimator();
+    }
 
     function animateValue(obj, start, end, duration) {
         if (prefersReducedMotion) {
@@ -177,6 +199,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (palletsInput && monthsInput) {
         palletsInput.addEventListener('input', updateEstimator);
         monthsInput.addEventListener('input', updateEstimator);
+        if (unitMonthsBtn) unitMonthsBtn.addEventListener('click', () => setDurationUnit('months'));
+        if (unitDaysBtn) unitDaysBtn.addEventListener('click', () => setDurationUnit('days'));
         updateEstimator();
     }
 

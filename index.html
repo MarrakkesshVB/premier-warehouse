@@ -332,6 +332,7 @@
                 <p class="mt-3 text-base md:text-lg text-slate-600 max-w-2xl" data-es="Tarifas accesibles y entrega puntual. Cargos de Aduana exentos para importadores.">
                     Affordable rates & on-time delivery. Customs Clearance Fees waived for importers.
                 </p>
+                <p class="mt-2 text-xs text-slate-400" data-es="Tarifas de referencia — pueden variar según volumen y temporada. Cotización final confirmada por nuestro equipo.">Reference rates — may vary by volume and season. Final quote confirmed by our team.</p>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-4 md:gap-5">
@@ -450,8 +451,8 @@
                         <span class="stencil-text" data-es="Estimador de Costos">Cost Estimator</span>
                     </div>
                     <h2 class="text-4xl md:text-5xl font-bold mb-6 font-display" data-es="Calcula tu inversión al instante">Calculate your investment instantly</h2>
-                    <p class="text-base md:text-lg text-slate-400 mb-10" data-es="Calcula tu costo mensual con nuestra tarifa estándar de $15.00 por pallet.">
-                        Calculate your monthly cost at our standard rate of $15.00 per pallet.
+                    <p class="text-base md:text-lg text-slate-400 mb-10" data-es="Calcula tu costo con nuestra tarifa estándar de $15.00 por pallet/mes — contratos diarios y semanales disponibles.">
+                        Calculate your cost at our standard rate of $15.00 per pallet/month — daily & weekly contracts available.
                     </p>
 
                     <div class="space-y-8 glass-card bg-white/5! border-white/10! p-6 md:p-8 rounded-2xl">
@@ -464,22 +465,35 @@
                             <input type="range" id="pallets" min="1" max="100" value="10" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-accent" />
                         </div>
 
-                        <!-- Months -->
+                        <!-- Duration: meses o días -->
                         <div>
-                            <div class="flex justify-between mb-2">
-                                <label class="font-bold text-sm uppercase tracking-wider text-slate-300" data-es="Duración (Meses)">Duration (Months)</label>
-                                <span class="font-mono font-bold text-accent" id="months-val">1</span>
+                            <div class="flex justify-between items-center mb-2">
+                                <label class="font-bold text-sm uppercase tracking-wider text-slate-300" data-es="Duración">Duration</label>
+                                <div class="flex items-center gap-2">
+                                    <div class="flex rounded-md overflow-hidden border border-slate-600">
+                                        <button type="button" id="unit-months" class="px-2 py-1 text-xs font-bold bg-accent text-white" data-es="Meses">Months</button>
+                                        <button type="button" id="unit-days" class="px-2 py-1 text-xs font-bold bg-slate-700 text-slate-300" data-es="Días">Days</button>
+                                    </div>
+                                    <span class="font-mono font-bold text-accent" id="months-val">1</span>
+                                </div>
                             </div>
                             <input type="range" id="months" min="1" max="12" value="1" class="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-accent" />
+                            <p id="duration-note" class="hidden text-xs text-slate-400 mt-2" data-es="Contratos diarios y semanales disponibles — cotización personalizada confirmada por nuestro equipo.">Daily & weekly contracts available — custom quote confirmed by our team.</p>
                         </div>
 
                         <div class="pt-6 border-t border-white/10">
                             <span class="text-slate-400 text-sm font-bold uppercase tracking-wider mb-2 block" data-es="Costo Estimado">Estimated Cost</span>
-                            <div class="flex items-baseline gap-2">
-                                <span class="text-4xl text-slate-500 font-light">$</span>
-                                <span id="total-cost" class="text-5xl md:text-6xl font-bold font-mono tracking-tighter text-white">150.00</span>
+                            <div id="estimate-monthly">
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-4xl text-slate-500 font-light">$</span>
+                                    <span id="total-cost" class="text-5xl md:text-6xl font-bold font-mono tracking-tighter text-white">150.00</span>
+                                </div>
+                                <p class="text-xs text-emerald-400 font-bold mt-2 bg-emerald-400/10 inline-block px-2 py-1 rounded" data-es="Basado en tarifa estándar de $15/pallet">Based on $15/pallet standard rate</p>
                             </div>
-                            <p class="text-xs text-emerald-400 font-bold mt-2 bg-emerald-400/10 inline-block px-2 py-1 rounded" data-es="Basado en tarifa estándar de $15/pallet">Based on $15/pallet standard rate</p>
+                            <div id="estimate-daily" class="hidden">
+                                <p class="text-slate-300 text-sm font-medium" data-es="Tu cotización personalizada está a un clic: sin números inventados, confirmada por nuestro equipo.">Your custom quote is one click away — no invented numbers, confirmed by our team.</p>
+                                <a href="#quote" class="mt-3 inline-flex items-center gap-2 bg-accent hover:bg-accent-dark text-white px-5 py-3 rounded-xl font-bold transition-all btn-glow" data-es="Solicitar cotización personalizada <span>→</span>">Get my custom quote <span>→</span></a>
+                            </div>
                             <p class="text-xs text-slate-500 mt-3" data-es="Tarifa de referencia sujeta a variación — cotización final confirmada por nuestro equipo.">Reference rate subject to change — final quote confirmed by our team.</p>
                         </div>
                     </div>
