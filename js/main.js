@@ -113,6 +113,40 @@ document.addEventListener('DOMContentLoaded', () => {
     const durationNote = document.getElementById('duration-note');
     const rate = 15;
     let durationUnit = 'months';
+    let estService = 'storage';
+    let estTurnaround = 'same_day';
+    const blockPallets = document.getElementById('block-pallets');
+    const blockDuration = document.getElementById('block-duration');
+    const blockTurnaround = document.getElementById('block-turnaround');
+    const estSameBtn = document.getElementById('est-same');
+    const estNextBtn = document.getElementById('est-next');
+
+    function setEstService(s) {
+        estService = s;
+        document.querySelectorAll('#service-picker .est-svc').forEach(b => {
+            const active = b.dataset.service === s;
+            b.className = 'est-svc px-2 py-2 text-xs font-bold rounded-md ' + (active ? 'bg-accent text-white' : 'bg-slate-700 text-slate-300');
+            b.setAttribute('aria-pressed', String(active));
+        });
+        if (blockPallets) blockPallets.classList.toggle('hidden', s === 'crossdock');
+        if (blockDuration) blockDuration.classList.toggle('hidden', s !== 'storage');
+        if (blockTurnaround) blockTurnaround.classList.toggle('hidden', s !== 'transload');
+        updateEstimator();
+    }
+
+    function setEstTurnaround(t) {
+        estTurnaround = t;
+        const same = t === 'same_day';
+        if (estSameBtn) {
+            estSameBtn.className = 'px-3 py-1.5 text-xs font-bold ' + (same ? 'bg-accent text-white' : 'bg-slate-700 text-slate-300');
+            estSameBtn.setAttribute('aria-pressed', String(same));
+        }
+        if (estNextBtn) {
+            estNextBtn.className = 'px-3 py-1.5 text-xs font-bold ' + (same ? 'bg-slate-700 text-slate-300' : 'bg-accent text-white');
+            estNextBtn.setAttribute('aria-pressed', String(!same));
+        }
+        updateEstimator();
+    }
 
     function setDurationUnit(u) {
         durationUnit = u;
@@ -153,16 +187,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateEstimator() {
         if (!palletsInput || !monthsInput) return;
-        
+
         const pallets = parseInt(palletsInput.value);
-        const months = parseInt(monthsInput.value);
-        
         palletsVal.textContent = pallets;
-        monthsVal.textContent = months;
-        
-        const total = pallets * months * rate;
-        const currentTotal = parseFloat(totalCost.textContent.replace(/,/g, '')) || 0;
-        animateValue(totalCost, currentTotal, total, 400);
+        monthsVal.textContent = monthsInput.value;
+
+        let total = null;
+        let dailyCta = false;
+        if (estService === 'storage') {
+            if (durationUnit === 'months') {
+                total = pallets * parseInt(monthsInput.value) * rate;
+            } else {
+                dailyCta = true;
+            }
+        } else if (estService === 'pickpack') {
+            total = pallets * 10;
+        } else if (estService === 'transload') {
+            total = pallets * (estTurnaround === 'same_day' ? 9 : 10.5);
+        } else if (estService === 'crossdock') {
+            total = 250;
+        }
+
+        const estMonthly = document.getElementById('estimate-monthly');
+        const estDaily = document.getElementById('estimate-daily');
+        if (estMonthly) estMonthly.classList.toggle('hidden', dailyCta);
+        if (estDaily) estDaily.classList.toggle('hidden', !dailyCta);
+
+        if (total !== null) {
+            const currentTotal = parseFloat(totalCost.textContent.replace(/,/g, '')) || 0;
+            animateValue(totalCost, currentTotal, total, 400);
+        }
 
         if (!prefersReducedMotion) {
             const displayCount = Math.min(pallets, 100);
@@ -201,6 +255,11 @@ document.addEventListener('DOMContentLoaded', () => {
         monthsInput.addEventListener('input', updateEstimator);
         if (unitMonthsBtn) unitMonthsBtn.addEventListener('click', () => setDurationUnit('months'));
         if (unitDaysBtn) unitDaysBtn.addEventListener('click', () => setDurationUnit('days'));
+        document.querySelectorAll('#service-picker .est-svc').forEach(b => {
+            b.addEventListener('click', () => setEstService(b.dataset.service));
+        });
+        if (estSameBtn) estSameBtn.addEventListener('click', () => setEstTurnaround('same_day'));
+        if (estNextBtn) estNextBtn.addEventListener('click', () => setEstTurnaround('next_day'));
         updateEstimator();
     }
 

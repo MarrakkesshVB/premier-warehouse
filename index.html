@@ -451,13 +451,21 @@
                         <span class="stencil-text" data-es="Estimador de Costos">Cost Estimator</span>
                     </div>
                     <h2 class="text-4xl md:text-5xl font-bold mb-6 font-display" data-es="Calcula tu inversión al instante">Calculate your investment instantly</h2>
-                    <p class="text-base md:text-lg text-slate-400 mb-10" data-es="Calcula tu costo con nuestra tarifa estándar de $15.00 por pallet/mes — contratos diarios y semanales disponibles.">
-                        Calculate your cost at our standard rate of $15.00 per pallet/month — daily & weekly contracts available.
+                    <p class="text-base md:text-lg text-slate-400 mb-10" data-es="Calcula tu costo al instante con las tarifas publicadas de nuestro Rate Board.">
+                        Calculate your cost instantly from our published Rate Board.
                     </p>
 
                     <div class="space-y-8 glass-card bg-white/5! border-white/10! p-6 md:p-8 rounded-2xl">
+                        <!-- Selector de servicio -->
+                        <div id="service-picker" class="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                            <button type="button" data-service="storage" class="est-svc px-2 py-2 text-xs font-bold rounded-md bg-accent text-white" aria-pressed="true" data-es="Almacenaje">Storage</button>
+                            <button type="button" data-service="pickpack" class="est-svc px-2 py-2 text-xs font-bold rounded-md bg-slate-700 text-slate-300" aria-pressed="false" data-es="Pick & Pack">Pick & Pack</button>
+                            <button type="button" data-service="transload" class="est-svc px-2 py-2 text-xs font-bold rounded-md bg-slate-700 text-slate-300" aria-pressed="false" data-es="Transload">Transload</button>
+                            <button type="button" data-service="crossdock" class="est-svc px-2 py-2 text-xs font-bold rounded-md bg-slate-700 text-slate-300" aria-pressed="false" data-es="Cross Dock">Cross Dock</button>
+                        </div>
+
                         <!-- Pallets -->
-                        <div>
+                        <div id="block-pallets">
                             <div class="flex justify-between mb-2">
                                 <label class="font-bold text-sm uppercase tracking-wider text-slate-300" data-es="Número de Pallets">Number of Pallets</label>
                                 <span class="font-mono font-bold text-accent" id="pallets-val">10</span>
@@ -466,7 +474,7 @@
                         </div>
 
                         <!-- Duration: meses o días -->
-                        <div>
+                        <div id="block-duration">
                             <div class="flex justify-between items-center mb-2">
                                 <label class="font-bold text-sm uppercase tracking-wider text-slate-300" data-es="Duración">Duration</label>
                                 <div class="flex items-center gap-2">
@@ -481,6 +489,15 @@
                             <p id="duration-note" class="hidden text-xs text-slate-400 mt-2" data-es="Contratos diarios y semanales disponibles — cotización personalizada confirmada por nuestro equipo.">Daily & weekly contracts available — custom quote confirmed by our team.</p>
                         </div>
 
+                        <!-- Turnaround: solo transload -->
+                        <div id="block-turnaround" class="hidden">
+                            <label class="font-bold text-sm uppercase tracking-wider text-slate-300 block mb-2" data-es="Tiempo de Entrega">Turnaround</label>
+                            <div class="flex rounded-md overflow-hidden border border-slate-600 w-fit">
+                                <button type="button" id="est-same" class="px-3 py-1.5 text-xs font-bold bg-accent text-white" aria-pressed="true" data-es="Mismo Día ($9.00)">Same Day ($9.00)</button>
+                                <button type="button" id="est-next" class="px-3 py-1.5 text-xs font-bold bg-slate-700 text-slate-300" aria-pressed="false" data-es="Día Siguiente ($10.50)">Next Day ($10.50)</button>
+                            </div>
+                        </div>
+
                         <div class="pt-6 border-t border-white/10">
                             <span class="text-slate-400 text-sm font-bold uppercase tracking-wider mb-2 block" data-es="Costo Estimado">Estimated Cost</span>
                             <div id="estimate-monthly">
@@ -488,7 +505,7 @@
                                     <span class="text-4xl text-slate-500 font-light">$</span>
                                     <span id="total-cost" class="text-5xl md:text-6xl font-bold font-mono tracking-tighter text-white">150.00</span>
                                 </div>
-                                <p class="text-xs text-emerald-400 font-bold mt-2 bg-emerald-400/10 inline-block px-2 py-1 rounded" data-es="Basado en tarifa estándar de $15/pallet">Based on $15/pallet standard rate</p>
+                                <p class="text-xs text-emerald-400 font-bold mt-2 bg-emerald-400/10 inline-block px-2 py-1 rounded" data-es="Basado en el Rate Board publicado">Based on published Rate Board</p>
                             </div>
                             <div id="estimate-daily" class="hidden">
                                 <p class="text-slate-300 text-sm font-medium" data-es="Tu cotización personalizada está a un clic: sin números inventados, confirmada por nuestro equipo.">Your custom quote is one click away — no invented numbers, confirmed by our team.</p>
