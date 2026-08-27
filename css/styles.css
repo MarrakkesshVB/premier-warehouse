@@ -15,19 +15,47 @@ body {
 
 /* Glassmorphism */
 .nav-glass {
-  background: rgba(255, 255, 255, 0.65);
-  -webkit-backdrop-filter: blur(20px) saturate(160%);
-  backdrop-filter: blur(20px) saturate(160%);
-  border: 1px solid rgba(15, 23, 42, 0.08);
-  box-shadow: 0 4px 24px rgba(15, 23, 42, 0.06);
-  transition: box-shadow 0.3s ease, background 0.3s ease;
+  background: transparent;
+  border: 1px solid transparent;
+  box-shadow: none;
+  transition: box-shadow 0.3s ease, background 0.3s ease, border-color 0.3s ease;
 }
 #navbar.nav-scrolled .nav-glass {
   background: rgba(255, 255, 255, 0.78);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
+  backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid rgba(15, 23, 42, 0.08);
   box-shadow: 0 12px 32px rgba(15, 23, 42, 0.14);
 }
+
+/* Pestaña del logo: recorte navy colgado del tope de la vitrina */
+.logo-tab {
+  background: var(--color-primary, #0f172a);
+  border-radius: 0 0 1rem 1rem;
+  box-shadow: 0 12px 32px rgba(2, 6, 23, 0.25);
+}
+/* Alas curvas (fillets cóncavos) que unen la pestaña a la vitrina */
+.logo-tab::before,
+.logo-tab::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+.logo-tab::before {
+  left: -20px;
+  width: 24px; /* solape de 4px sobre la pestaña: elimina la costura */
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 20' preserveAspectRatio='none'%3E%3Cpath d='M0 0 A20 20 0 0 1 20 20 L24 20 L24 0 Z' fill='%230F172A'/%3E%3C/svg%3E") no-repeat 0 0 / 100% 100%;
+}
+.logo-tab::after {
+  right: -20px;
+  width: 24px; /* ídem lado derecho */
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 20' preserveAspectRatio='none'%3E%3Cpath d='M24 0 A20 20 0 0 0 4 20 L0 20 L0 0 Z' fill='%230F172A'/%3E%3C/svg%3E") no-repeat 0 0 / 100% 100%;
+}
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .nav-glass { background: rgba(255, 255, 255, 0.92); }
+  #navbar.nav-scrolled .nav-glass { background: rgba(255, 255, 255, 0.92); }
 }
 
 .glass {
